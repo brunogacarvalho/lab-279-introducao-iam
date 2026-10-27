@@ -160,7 +160,117 @@
                 <li>Testar diferentes identidades ajuda a confirmar se o acesso está configurado corretamente.</li>
             </ul>
         </section>
+                <section class="section flashcards-section">
+            <span class="section-number">07</span>
+            <h2>Flashcards — Revise o que aprendeu</h2>
+            <p>Teste seus conhecimentos sobre IAM antes de consultar cada resposta.</p>
 
+            <div class="flashcard" id="flashcard">
+                <span class="flashcard-counter" id="card-counter">1 de 8</span>
+                <span class="flashcard-label">PERGUNTA</span>
+                <h3 id="card-question">Qual é a função principal do IAM?</h3>
+
+                <div class="flashcard-answer" id="card-answer" hidden>
+                    <span class="flashcard-label">RESPOSTA</span>
+                    <p id="card-answer-text"></p>
+                </div>
+
+                <button type="button" class="reveal-button" id="reveal-answer">
+                    Revelar resposta
+                </button>
+            </div>
+
+            <div class="flashcard-navigation">
+                <button type="button" id="previous-card" aria-label="Cartão anterior">
+                    ← Anterior
+                </button>
+                <button type="button" id="next-card" aria-label="Próximo cartão">
+                    Próximo →
+                </button>
+            </div>
+        </section>
+
+        <script>
+            const flashcards = [
+                {
+                    question: "Qual é a função principal do IAM?",
+                    answer: "Controlar quem pode acessar recursos da AWS e quais ações pode executar."
+                },
+                {
+                    question: "O que é um usuário do IAM?",
+                    answer: "Uma identidade que pode receber permissões para acessar recursos da AWS."
+                },
+                {
+                    question: "Por que utilizar grupos no IAM?",
+                    answer: "Para organizar usuários e gerenciar permissões compartilhadas de maneira centralizada."
+                },
+                {
+                    question: "O que uma política do IAM define?",
+                    answer: "Quais ações são permitidas ou negadas, sobre quais recursos e em quais condições."
+                },
+                {
+                    question: "Qual é a diferença entre políticas gerenciadas e inline?",
+                    answer: "Políticas gerenciadas são independentes e reutilizáveis. Políticas inline ficam incorporadas a uma única identidade."
+                },
+                {
+                    question: "O que significa princípio do menor privilégio?",
+                    answer: "Conceder somente as permissões necessárias para realizar cada atividade."
+                },
+                {
+                    question: "Por que user-2 não conseguiu parar a instância EC2?",
+                    answer: "Porque suas permissões eram somente de leitura e nenhuma política de identidade autorizava ec2:StopInstances."
+                },
+                {
+                    question: "O que acontece quando uma ação não tem permissão concedida?",
+                    answer: "Por padrão, o acesso é negado. Uma negação explícita também prevalece sobre uma permissão concedida."
+                }
+            ];
+
+            let currentCard = 0;
+
+            const questionElement = document.getElementById("card-question");
+            const answerElement = document.getElementById("card-answer");
+            const answerTextElement = document.getElementById("card-answer-text");
+            const counterElement = document.getElementById("card-counter");
+            const revealButton = document.getElementById("reveal-answer");
+            const previousButton = document.getElementById("previous-card");
+            const nextButton = document.getElementById("next-card");
+
+            function showCard() {
+                const card = flashcards[currentCard];
+
+                questionElement.textContent = card.question;
+                answerTextElement.textContent = card.answer;
+                counterElement.textContent = `${currentCard + 1} de ${flashcards.length}`;
+
+                answerElement.hidden = true;
+                revealButton.hidden = false;
+
+                previousButton.disabled = currentCard === 0;
+                nextButton.disabled = currentCard === flashcards.length - 1;
+            }
+
+            revealButton.addEventListener("click", () => {
+                answerElement.hidden = false;
+                revealButton.hidden = true;
+            });
+
+            previousButton.addEventListener("click", () => {
+                if (currentCard > 0) {
+                    currentCard--;
+                    showCard();
+                }
+            });
+
+            nextButton.addEventListener("click", () => {
+                if (currentCard < flashcards.length - 1) {
+                    currentCard++;
+                    showCard();
+                }
+            });
+
+            showCard();
+        </script>
         <footer>
             <p>Documentação de estudos AWS — Bruno Carvalho</p>
             <p>Lab 279 · Introdução ao IAM</p>
