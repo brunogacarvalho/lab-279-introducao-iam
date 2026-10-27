@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentação prática do laboratório AWS IAM, com usuários, grupos, políticas e controle de acesso.">
+    <title>Lab 279 | Introdução ao AWS IAM</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <span class="eyebrow">AWS CLOUD FOUNDATIONS</span>
+            <h1>Identity and Access Management</h1>
+            <p class="subtitle">Laboratório 279 — Introdução ao AWS IAM</p>
+            <p class="intro">
+                Um estudo prático sobre como controlar quem pode acessar
+                recursos da AWS e quais ações cada identidade pode executar.
+            </p>
+            <div class="tags">
+                <span>IAM</span>
+                <span>Amazon EC2</span>
+                <span>Amazon S3</span>
+                <span>Segurança</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <span class="section-number">01</span>
+            <h2>Objetivo do laboratório</h2>
+            <p>
+                Configurar uma política de senhas, analisar usuários e grupos
+                do IAM, atribuir permissões e testar como essas permissões
+                determinam o acesso aos serviços da AWS.
+            </p>
+        </section>
+
+        <section class="section">
+            <span class="section-number">02</span>
+            <h2>Como o IAM organiza o acesso</h2>
+            <div class="concept-grid">
+                <article class="concept-card">
+                    <h3>Usuários</h3>
+                    <p>Identidades que podem receber permissões para acessar recursos da AWS.</p>
+                </article>
+                <article class="concept-card">
+                    <h3>Grupos</h3>
+                    <p>Conjuntos de usuários que compartilham permissões por meio de políticas.</p>
+                </article>
+                <article class="concept-card">
+                    <h3>Políticas</h3>
+                    <p>Documentos que definem as ações permitidas ou negadas.</p>
+                </article>
+                <article class="concept-card">
+                    <h3>Permissões</h3>
+                    <p>Determinam quais operações uma identidade pode realizar em cada recurso.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-number">03</span>
+            <h2>Distribuição das permissões</h2>
+            <p>
+                No laboratório, cada usuário foi associado a um grupo com
+                permissões diferentes.
+            </p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>Grupo</th>
+                            <th>Acesso concedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>user-1</td>
+                            <td>S3-Support</td>
+                            <td>Leitura no Amazon S3</td>
+                        </tr>
+                        <tr>
+                            <td>user-2</td>
+                            <td>EC2-Support</td>
+                            <td>Leitura no Amazon EC2</td>
+                        </tr>
+                        <tr>
+                            <td>user-3</td>
+                            <td>EC2-Admin</td>
+                            <td>Visualizar, iniciar e parar instâncias EC2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-number">04</span>
+            <h2>Teste de acesso: permissão negada</h2>
+            <p>
+                O usuário <code>user-2</code> tentou parar uma instância EC2,
+                mas a AWS bloqueou a operação porque nenhuma política de
+                permissões vinculada à identidade autorizava a ação
+                <code>ec2:StopInstances</code>.
+            </p>
+            <div class="result">
+                <span class="result-icon">!</span>
+                <div>
+                    <h3>Acesso negado</h3>
+                    <p>
+                        O usuário podia consultar informações das instâncias,
+                        mas não tinha autorização para interrompê-las.
+                    </p>
+                </div>
+            </div>
+            <figure>
+                <img
+                    src="../screenshots/3.ec2-stop-instance-access-denied.png"
+                    alt="Mensagem da AWS informando que o usuário não tem permissão para parar uma instância EC2"
+                    loading="lazy">
+                <figcaption>
+                    Evidência do teste de controle de acesso do IAM.
+                </figcaption>
+            </figure>
+        </section>
+
+        <section class="section">
+            <span class="section-number">05</span>
+            <h2>Evidências do laboratório</h2>
+            <div class="evidence-grid">
+                <figure>
+                    <img
+                        src="../1.screenshots/iam-users-and-groups.png"
+                        alt="Lista de usuários e quantidade de grupos associados"
+                        loading="lazy">
+                    <figcaption>Usuários e associação a grupos</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        src="../2.screenshots/iam-groups-and-permissions.png"
+                        alt="Lista de grupos do IAM e suas políticas de permissões"
+                        loading="lazy">
+                    <figcaption>Grupos e políticas de permissões</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section">
+            <span class="section-number">06</span>
+            <h2>O que aprendi</h2>
+            <ul class="learning-list">
+                <li>Os grupos ajudam a organizar permissões para vários usuários.</li>
+                <li>As políticas determinam quais ações podem ser executadas.</li>
+                <li>Permitir a leitura de um recurso não significa permitir sua alteração.</li>
+                <li>O princípio do menor privilégio reduz permissões desnecessárias.</li>
+                <li>Testar diferentes identidades ajuda a confirmar se o acesso está configurado corretamente.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Documentação de estudos AWS — Bruno Carvalho</p>
+            <p>Lab 279 · Introdução ao IAM</p>
+        </footer>
+    </main>
+</body>
+</html>
