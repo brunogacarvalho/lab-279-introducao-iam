@@ -40,3 +40,5 @@ As capturas de tela que documentam os usuários, grupos, permissões e a tentati
 ## O que aprendi
 
 O IAM permite organizar as permissões por meio de grupos, evitando a necessidade de configurar individualmente cada usuário. Os testes de acesso ajudam a verificar se as permissões concedidas correspondem às responsabilidades de cada identidade.
+
+Página: https://brunogacarvalho.github.io/lab-279-introducao-iam/
