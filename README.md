@@ -41,4 +41,8 @@ As capturas de tela que documentam os usuários, grupos, permissões e a tentati
 
 O IAM permite organizar as permissões por meio de grupos, evitando a necessidade de configurar individualmente cada usuário. Os testes de acesso ajudam a verificar se as permissões concedidas correspondem às responsabilidades de cada identidade.
 
+## Revisão interativa
+
+A página do laboratório também conta com um bloco de **flashcards interativos** para revisar os principais conceitos de IAM, usuários, grupos, políticas de permissões e princípio do menor privilégio. Cada cartão apresenta uma pergunta, permite revelar a resposta e navegar entre os cartões para testar os conhecimentos adquiridos.
+
 Página: https://brunogacarvalho.github.io/lab-279-introducao-iam/
