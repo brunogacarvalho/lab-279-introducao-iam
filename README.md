@@ -1,4 +1,4 @@
-# Lab 279 — Introdução ao AWS Identity and Access Management (IAM)
+# Lab 3 - Lab 279 — Introdução ao AWS Identity and Access Management (IAM)
 
 ## Objetivo
 
